@@ -1,0 +1,67 @@
+﻿@model PagedList.IPagedList<ExtendedSearch.Engine>
+	@using PagedList.Mvc;
+	<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+	@{
+		ViewBag.Title = "Search Configuration";
+	}
+
+	@section featured
+{
+		<section class="featured">
+			<div class="content-wrapper">
+				<hgroup class="title">
+					<h1>@ViewBag.Title.</h1>
+			</div>
+		</section>
+	}
+						   	<h2>Engines</h2>
+
+						   	<p>
+						   		@Html.ActionLink("Create New", "Create")
+						   </p>
+						   @using (Html.BeginForm("Index", "SearchConfiguration", FormMethod.Get))
+						   {
+						   	<p>
+						   		Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+						   <input type="submit" value="Search" />
+						   </p>
+						   }
+						   <table class="table">
+						   	<tr>
+						   		<th>
+						   			@Html.ActionLink("Engine Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+						   </th>
+						   <th>
+						   	Url
+						   </th>
+						   <th>
+						   </th>
+						   <th></th>
+						   </tr>
+
+
+						   @foreach (var item in Model)
+						   {
+						   	<tr>
+						   		<td>
+						   			@Html.DisplayFor(modelItem => item.EngineName)
+						   </td>
+						   <td>
+						   	@Html.DisplayFor(modelItem => item.Url)
+						   </td>
+
+						   <td>
+						   	@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+						   @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+						   @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+						   </td>
+						   </tr>
+						   }
+
+						   </table>
+						   <br />
+						   Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+						   @Html.PagedListPager(Model, page => Url.Action("Index",
+	new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

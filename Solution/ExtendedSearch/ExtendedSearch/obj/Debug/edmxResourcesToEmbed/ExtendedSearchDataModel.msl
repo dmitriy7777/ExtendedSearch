@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExtendedSearchModelStoreContainer" CdmEntityContainer="ExtendedSearchEntities">
+    <EntitySetMapping Name="Engines">
+      <EntityTypeMapping TypeName="ExtendedSearchModel.Engine">
+        <MappingFragment StoreEntitySet="Engines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EngineName" ColumnName="EngineName" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Searches">
+      <EntityTypeMapping TypeName="ExtendedSearchModel.Search">
+        <MappingFragment StoreEntitySet="Searches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Engine" ColumnName="Engine" />
+          <ScalarProperty Name="SearchFor" ColumnName="SearchFor" />
+          <ScalarProperty Name="SearchResult" ColumnName="SearchResult" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

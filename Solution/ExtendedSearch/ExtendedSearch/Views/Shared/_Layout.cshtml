@@ -1,0 +1,52 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - Extended Search</title>
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<header>
+	<div class="content-wrapper">
+		<div class="float-left">
+			<p class="site-title">
+				@Html.ActionLink("Search Engine", "Index", "Search")
+			</p>
+		</div>
+		<div class="float-right">
+			<nav>
+				<ul id="menu">
+					<li>@Html.ActionLink("Search Engine", "Index", "Search")</li>
+					<li>@Html.ActionLink("Search Results", "Index", "SearchResults")</li>
+					<li>@Html.ActionLink("Search Configuration", "Index", "SearchConfiguration")</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+
+	@RenderSection("featured", required: false)
+
+<div id="body" class="content-wrapper">
+	@RenderBody()
+</div>
+
+<footer>
+	<div class="content-wrapper">
+		<div class="float-left">
+			<p>&copy; @DateTime.Now.Year - Extended Search</p>
+		</div>
+	</div>
+</footer>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

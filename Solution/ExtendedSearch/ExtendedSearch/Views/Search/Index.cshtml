@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Search Engine";
+}
+
+@section featured
+{
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>                
+            </hgroup>
+        </div>
+    </section>    
+}
+<html lang="en">
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+	<script>
+
+		$(function() {
+			// OPEN
+			$('[data-popup-open]').on('click', function(e) {
+				var search = getSearch();
+				if (search == null) {
+					alert("Specify search!");
+					return false;
+				}
+
+				var json = JSON.stringify(search);
+
+				debugger;
+
+				$.ajax({
+					url: '@Url.Action("GetResult", "Search")',
+					type: 'POST',
+					dataType: 'json',
+					data: json,
+					contentType: 'application/json; charset=utf-8',
+					success: function(data) {
+
+						var html = data.searchResult;
+						var enghtml = data.msg;
+
+						debugger;
+
+						$("#EngResult").html(enghtml);
+						$("#resultHtml").html(html);
+
+						$("#resultHtml").dialog();
+
+					},
+					error: function(ex) {
+						alert("error --->" + ex);
+					}
+				});
+
+
+				function getSearch() {
+					debugger;
+
+					var searchinput = $("#srchterm").val();
+
+					return { searchinput: searchinput };
+				}
+
+				var targeted_popup_class = jQuery(this).attr('data-popup-open');
+				$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+				e.preventDefault();
+
+				return false;
+			});
+
+			// CLOSE
+			$('[data-popup-close]').on('click', function(e) {
+				var targeted_popup_class = jQuery(this).attr('data-popup-close');
+				$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+				e.preventDefault();
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<form id="searchForm" class="body-content">
+		<input id="srchterm" type="text" style="width: 500px" />
+		<a class="btn" data-popup-open="popup-1" href="#">Search</a>
+	</form>
+
+	<div class="popup" data-popup="popup-1">
+		<div class="popup-inner">
+			<div id="EngResult"></div><div> search result</div>
+			<a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+			<p>
+				<a data-popup-close="popup-1" href="#">Close</a>
+			</p>
+
+			<div id="resultHtml"></div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+       

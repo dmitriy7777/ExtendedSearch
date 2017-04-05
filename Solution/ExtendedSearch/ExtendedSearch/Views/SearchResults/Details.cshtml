@@ -1,0 +1,21 @@
+﻿@model ExtendedSearch.Search
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br />
+<br />
+
+
+<div style="position: relative; overflow-y: scroll; height: 800px!important;">
+	<h4>Search Details</h4>
+	@Html.ActionLink("Back to List", "Index")
+	<br />
+	<br />
+	@Html.Raw(Model.SearchResult)
+</div>
+<p>
+	@Html.ActionLink("Back to List", "Index")
+</p>
