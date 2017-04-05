@@ -56,9 +56,25 @@ namespace ExtendedSearch.Controllers
 		private async Task<SearchResponce> ProcessSe(string term, string se, string url)
 		{
 
+			//if (se == "GoogleSe")
+			//{
+			//	await Task.Delay(1000);
+			//}
+
+			//if (se == "GoogleSe" || se == "BingSe")
+			//{
+			//	await Task.Delay(1000);
+			//}
+
+			return await Process(term, se, url);
+		}
+
+		private async Task<SearchResponce> Process(string term, string se, string url)
+		{
+
 			var gs = string.Format(url, term);
 
-			var response  = string.Empty;
+			var response = string.Empty;
 			var httpWebRequest = WebRequest.Create(gs) as HttpWebRequest;
 
 			if (httpWebRequest != null)
